@@ -36,7 +36,16 @@ jobs:
 
       - name: generate html report
         if: always()  # ensure the report is generated regardless of test results
-        uses: actions/upload-artifact@v4.6.2
+        uses: actions/upload-artifact@v4.6.2   # marketplace name upload a build artifact 
         with:
           name: Newman Report 
           path: newman/*.html
+
+      - name: creating github page branch  # marketplace name github pages action
+        if: always()
+        uses: peaceiris/actions-gh-pages@v4.0.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}  # provide github token
+          publish_dir: newman/  # path from where the html report will pe pulled
+          # give permission Settings>> general >>Workflow permissions
+      
