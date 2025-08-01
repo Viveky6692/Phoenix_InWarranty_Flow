@@ -1,13 +1,12 @@
 name: Postman Collection Workflow
-  on :  
-    push:  
-  branches:  
- -main  
-  workflow_dispatch:  
-  schedule:  
- -cron : 30 02 * * * # 8 AM IST everyday 
-    -cron : 00 14 * * * # 7:30 PM IST everyday 
-      -cron : 00 06 * * 1-5  # 11:30 AM IST mon -friday
+on :  
+  push:  
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+   -cron: 30 02 * * * # 8 AM IST everyday 
+   -cron: 00 14 * * * # 7:30 PM IST everyday
+   -cron: 00 06 * * 1-5  # 11:30 AM IST mon -friday
 
 jobs:
   run-postman-tests:             #Job name
