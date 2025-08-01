@@ -35,6 +35,7 @@ jobs:
           -r cli,htmlextra
 
       - name: genetrate html report
+        if: always() #ensure that the archive file is always executed irresptive of the whether postman tests are failing or passing.
         uses: actions/upload-artifact@v4.6.2
         with:
           name: Newman Report 
