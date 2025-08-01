@@ -1,40 +1,42 @@
 name: Postman Collection workflow   # name of the workflow
+
 on:
   push:   # pushing the workflow on main branch
     branches: [main]
 
   workflow_dispatch: # manual trigger
+
   schedule:   # scheduling cron jobs to run on VM
     - cron: "30 02 * * *"    # 8:00 AM IST everyday
     - cron: "00 14 * * *"    # 7:30 PM IST everyday
-    - cron: "00 06 * * 1-5"   # 11:30 AM IST Mon–Fri
+    - cron: "00 06 * * 1-5"  # 11:30 AM IST Mon–Fri
 
 jobs:
-  Run_postman-tests           # Job Name
-    runs-on: ubuntu-latest    # Run workflow on ubuntu latest
+  Run_postman-tests:           # Job Name (MUST end with colon)
+    runs-on: ubuntu-latest     # Run workflow on ubuntu latest
 
     steps:                      # Steps to be followed while running the workflow
-    - name: checkout the postman collection    # copy data to git repsitory
-      uses: actions/checkout@v4.2.2
+      - name: checkout the postman collection    # copy data to git repository
+        uses: actions/checkout@v4.2.2
 
-    - name: install nodejs and npm    
-      uses: actions/setup-node@v3.9.1
+      - name: install nodejs and npm    
+        uses: actions/setup-node@v3.9.1
 
-    - name: install newman and html-extra libraries
-      run: |
-        npm install -g newman \
-        npm install -g newman-reporter-htmextra
+      - name: install newman and html-extra libraries
+        run: |
+          npm install -g newman
+          npm install -g newman-reporter-htmlextra
 
-    - name:  Run Postman collection on VM (Ubuntu) 
-      run: |
-        newman run In_Warranty_Newman_CLI2.postman_collection \
-        -e QA.postman_environment.json \
-        -d testData.csv \
-        -r cli,htmlextra
+      - name: Run Postman collection on VM (Ubuntu) 
+        run: |
+          newman run In_Warranty_Newman_CLI2.postman_collection \
+            -e QA.postman_environment.json \
+            -d testData.csv \
+            -r cli,htmlextra
 
-    - name: genetrate html report
-      if: always()  #ensure that the archive file is always executed irresptive of the whether postman tests are failing or passing.
-      uses: actions/upload-artifact@v4.6.2
-      with:
-        name: Newman Report 
-        path: newman/*html
+      - name: generate html report
+        if: always()  # ensure the report is generated regardless of test results
+        uses: actions/upload-artifact@v4.6.2
+        with:
+          name: Newman Report 
+          path: newman/*.html
