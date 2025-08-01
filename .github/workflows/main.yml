@@ -32,7 +32,8 @@ jobs:
           newman run In_Warranty_Newman_CLI2.postman_collection \
             -e QA.postman_environment.json \
             -d testData.csv \
-            -r cli,htmlextra
+            -r cli,htmlextra \
+            --reporter-htmlextra-export .newman/index.html # index html report is stored 
 
       - name: generate html report
         if: always()  # ensure the report is generated regardless of test results
