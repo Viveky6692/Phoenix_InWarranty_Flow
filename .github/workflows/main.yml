@@ -1,0 +1,38 @@
+name: "Postman Collection Workflow" 
+  on:  
+   push:  
+  branches:  
+ -main  
+  workflow_dispatch:  
+  schedule:  
+ -cron : 30 02 * * * # 8 AM IST everyday 
+    -cron : 00 14 * * * # 7:30 PM IST everyday 
+      -cron : 00 06 * * 1-5  # 11:30 AM IST mon -friday
+
+jobs:
+  run-postman-tests:             #Job name
+    runs-on:  ubuntu-latest      #vm (virtual machine)
+
+steps:
+  - name: Checkout the postman collection
+      uses: actions/checkout@v4.2.2          #Copy PostmanCollection to VM 
+
+  - name: Install Nodejs and npm
+    uses: actions/setup-node@v3.9.1          #install nodejs Env on VM
+    with:
+      node-version: 22
+
+  - name: install newman and htmlextra globally
+    run: |
+      npm install -g newman                      #install newman library
+      npm install -g newman-reporter-htmlextra   #install newman-htmlextra library
+
+
+ - name: run postman collection on VM(ubuntu)
+   run: |
+     newman -run In_Warranty_Newman_CLI2.postman_collection \
+     -e QA.postman_environment.json \
+     -d testData.csv \
+     -r cli,htmextra
+      
+      
