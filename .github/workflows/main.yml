@@ -49,4 +49,15 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}  # provide github token
           publish_dir: newman/  # path from where the html report will pe pulled
           # give permission Settings>> general >>Workflow permissions
+          username:${{ secrets.EMAIL_ID}}
+          password:${{ secrets.EMAIL_PASSWORD}}
+          subject: Phoenix In warranty Flow Test Execurtion report email
+          to:ccivivek123@gmail.com
+          from:${{ secrets.EMAIL_ID}}
+          body: |
+                Hi,
+                Phoenix In warranty test has been executed . The Report has been published.
+                The Report link is : https://viveky6692.github.io/Phoenix_InWarranty_Flow/
+          
+          
       
