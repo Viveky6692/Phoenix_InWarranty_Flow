@@ -44,13 +44,12 @@ jobs:
 
       - name: creating github page branch  # marketplace name github pages action
         if: always()
-        uses: peaceiris/actions-gh-pages@v4.0.0
+        uses: dawidd6/action-send-mail@v5
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}  # provide github token
-          publish_dir: newman/  # path from where the html report will pe pulled
-          # give permission Settings>> general >>Workflow permissions
-          username:${{ secrets.EMAIL_ID}}
-          password:${{ secrets.EMAIL_PASSWORD}}
+          publish_dir: newman/  # path from where the html report will pe pulled # give permission Settings>> general >>Workflow permissions
+          username:${{ secrets.EMAIL_ID}}  # added from settings secrets>> repository secrets
+          password:${{ secrets.EMAIL_PASSWORD}}  # not gmail password use app password 
           subject: Phoenix In warranty Flow Test Execurtion report email
           to:ccivivek123@gmail.com
           from:${{ secrets.EMAIL_ID}}
