@@ -7,7 +7,7 @@ on:
   workflow_dispatch: # manual trigger
 
   schedule:   # scheduling cron jobs to run on VM
-    - cron: "30 02 * * *"    # 8:00 AM IST everyday
+    - cron: "30 02 * * *"    # 8:00 AM IST everyda
     - cron: "00 14 * * *"    # 7:30 PM IST everyday
     - cron: "00 06 * * 1-5"  # 11:30 AM IST Mon–Fri
 
