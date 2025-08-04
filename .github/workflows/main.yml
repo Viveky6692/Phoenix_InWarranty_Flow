@@ -35,14 +35,14 @@ jobs:
             -r cli,htmlextra \
             --reporter-htmlextra-export newman/index.html # index html report is stored 
 
-      - name: generate html report
+      - name: upload html report
         if: always()  # ensure the report is generated regardless of test results
         uses: actions/upload-artifact@v4.6.2   # marketplace name upload a build artifact 
         with:
           name: Newman Report 
           path: newman/*.html
 
-      - name: creating github page branch  # marketplace name github pages action
+      - name: Send auto email # marketplace name github pages action
         if: always()
         uses: dawidd6/action-send-mail@v5
         with:
