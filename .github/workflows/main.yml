@@ -13,7 +13,7 @@ on:
 
 jobs:
   Run_postman-tests:           # Job Name (MUST end with colon)
-    runs-on:  self-hosted     # Run workflow on ubuntu latest
+    runs-on:  vivek-EC2-runner     # Run workflow on ubuntu latest
 
     steps:                      # Steps to be followed while running the workflow
       - name: checkout the postman collection    # copy data to git repository
