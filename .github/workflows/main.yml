@@ -54,7 +54,7 @@ jobs:
           username: ${{ secrets.EMAIL_ID}}  # added from settings secrets>> repository secrets
           password: ${{ secrets.EMAIL_PASSWORD}}  # not gmail password use app password 
           subject: Phoenix In warranty Flow Test Execution report email
-          to: ccivivek123@gmail.com
+          to: ccivivek123@gmail.com,preetiyadavsln1993@gmail.com
           from: ${{ secrets.EMAIL_ID}}
           body: |
                 Hi,
