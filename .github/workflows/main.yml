@@ -6,14 +6,14 @@ on:
 
   workflow_dispatch: # manual trigger
 
-  schedule:   # scheduling cron jobs to run on VM
+  schedule:   # scheduling cron jobs to run on Vm
     - cron: "30 02 * * *"    # 8:00 AM IST everyda
     - cron: "00 14 * * *"    # 7:30 PM IST everyday
     - cron: "00 06 * * 1-5"  # 11:30 AM IST Mon–Fri
 
 jobs:
   Run_postman-tests:           # Job Name (MUST end with colon)
-    runs-on:  ubuntu-latest     # Run workflow on ubuntu latest
+    runs-on:  ubuntu-latest     # Run workflow on ubuntu latest VM
 
     steps:                      # Steps to be followed while running the workflow
       - name: checkout the postman collection    # copy data to git repository
@@ -47,7 +47,7 @@ jobs:
 
       - name: Send auto email # marketplace name github pages action
         if: always()
-        uses: dawidd6/action-send-mail@v5
+        uses: dawidd6/action-send-mail@v5   // marketplace plugin
         with:
           server_address: smtp.gmail.com
           server_port: 465
