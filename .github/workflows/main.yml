@@ -17,7 +17,7 @@ jobs:
 
     steps:                      # Steps to be followed while running the workflow
       - name: checkout the postman collection    # copy data to git repository
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@v4.2.2   # installed from marketplace
         
 
       - name: install nodejs and npm    
