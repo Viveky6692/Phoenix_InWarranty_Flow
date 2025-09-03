@@ -1,0 +1,36 @@
+name: Postman Collection Workflow   # name of Github actions flow
+
+on: # trigger
+push:
+branches: [main] 
+
+workflow_dispatch:
+
+schedule:
+- cron :"30 20 * * *"
+- cron :"30 20 * * *"
+
+jobs:
+Run_Postman_tests:
+runs on: ubuntu-latest
+
+steps:
+-name: checkout postman Collection 
+uses: uses: actions/checkout@v4.2.2 
+
+-name: install nodejs and npm 
+ uses: actions/setup-node@v3.9.1
+ with:
+ node-version:'18'
+
+ -name: install newman and html extra libraries 
+ run: |
+ npm install -g newman
+ npm install -g newman-reporter-htmlextra
+
+ -name: Run Postman Collection 
+ run: |
+ 
+
+ 
+ 
