@@ -30,6 +30,28 @@ uses: uses: actions/checkout@v4.2.2
 
  -name: Run Postman Collection 
  run: |
+ newman run In_Warranty_Newman_CLI2.postman_collection \
+            -e QA.postman_environment.json \
+            -d testData.csv \
+            -r cli,htmlextra \
+            --reporter-htmlextra-export newman/index.html # index html report is stored  
+
+ -name: Upload HTML report 
+  if: always()
+  uses:  actions/upload-artifact@v4.6.2
+  with:
+  name: Newman_report
+  path: newman/*.html
+
+  -name: send auto email 
+  if: always()
+  uses: dawidd6/action-send-mail@v6
+  with: 
+  server_address
+  server_port:
+  
+ 
+ 
  
 
  
